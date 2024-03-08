@@ -3,24 +3,25 @@ const path = require('path');
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
 
-const PORT = process.env.PORT || 3001;
+const PORT = 3000;
 const app = express();
 
 //read from database 
 const readDb = () => {
-    const data = fs.readFile(path.join(__dirname, './db/db.json'), 'utf8');
+    const data = fs.readFileSync(path.join(__dirname, './db/db.json'), 'utf8');
     return JSON.parse(data);
 }
 
 //write to database
 const writeDb = (data) => {
-    fs.writeFile(path.join(__dirname, './db/db.json'), JSON.stringify(data, null, 4));
+    fs.writeFileSync(path.join(__dirname, './db/db.json'), JSON.stringify(data, null, 2));
 }
 
 //middleware
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.json());
+
 app.use(express.static('public'));
 
 //GET route for notes
@@ -36,7 +37,11 @@ res.json(noteData);
 
 //POST route to save a new note
 app.post('/api/notes', (req, res) => {
-    const newNote = req.body;
+    const { title, text } = req.body;
+    const newNote = {
+        title,
+        text,
+    };
     newNote.id = uuidv4()
 
     const noteData = readDb();
@@ -48,8 +53,9 @@ app.post('/api/notes', (req, res) => {
 
 //DELETE route to remove saved notes
 app.delete('/api/notes/:id', (req, res) => {
-    let noteData = readDb();
-    noteData = noteData.filter(noteData => noteData.id !== req.params);
+    const noteId = req.params.id;
+    let noteData = readDb(data);
+    noteData = noteData.filter(noteData => noteData.id !== noteId);
     writeDb(noteData);
 
     res.json({ message: 'Your note has been deleted' });
@@ -62,5 +68,5 @@ app.get('*', (req, res) => {
 
 //Starts server and listen for http requests
 app.listen(PORT, () => {
-    console.log('Server is listening at http://localhost:${PORT}')
+    console.log('Server is listening at http://localhost: ${PORT}')
 });
