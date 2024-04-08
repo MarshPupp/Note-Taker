@@ -8,13 +8,13 @@ const app = express();
 
 //read from database 
 const readDb = () => {
-    const data = fs.readFileSync(path.join(__dirname, './db/db.json'), 'utf8');
+    const data = fs.readFileSync(path.join(__dirname, 'db','db.json'), 'utf8');
     return JSON.parse(data);
 }
 
 //write to database
 const writeDb = (data) => {
-    fs.writeFileSync(path.join(__dirname, './db/db.json'), JSON.stringify(data, null, 2));
+    fs.writeFileSync(path.join(__dirname, 'db','db.json'), JSON.stringify(data, null, 2));
 }
 
 //middleware
@@ -26,7 +26,7 @@ app.use(express.static('public'));
 
 //GET route for notes
 app.get('/notes', (req, res) => {
-    res.sendFile(path.join(__dirname,'public/notes.html'))
+    res.sendFile(path.join(__dirname,'public','notes.html'))
 });
 
 //GET route to return saved notes from database
@@ -61,7 +61,7 @@ app.delete('/api/notes/:id', (req, res) => {
     res.json({ message: 'Your note has been deleted' });
 });
 
-//default route
+//default catch-all route
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 })
