@@ -54,10 +54,10 @@ app.post('/api/notes', (req, res) => {
 //DELETE route to remove saved notes
 app.delete('/api/notes/:id', (req, res) => {
     const noteId = req.params.id;
-    let noteData = readDb(data);
+    let noteData = readDb();
     noteData = noteData.filter(noteData => noteData.id !== noteId);
     writeDb(noteData);
-
+    console.log(noteData);
     res.json({ message: 'Your note has been deleted' });
 });
 
