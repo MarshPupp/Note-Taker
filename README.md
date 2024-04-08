@@ -30,9 +30,8 @@ THEN I am presented with empty fields to enter a new note title and the note’s
 ## Links ##
 Link to repository: https://github.com/MarshPupp/Note-Taker 
 
-Link to deployed site: Due to technical difficulties I'm unable to login to Heroku and their support team hasn't been very helpfull, so I created a walk through of the application deployed locally.
-## Walkthrough ##
-Here is the link to the walkthrough video: https://drive.google.com/file/d/1bA2RtJmxbjfaK8NwreVlUUHx2aAlelFD/view?usp=sharing 
+Due to technical difficulties I'm unable to login to Heroku and their support team hasn't been very helpfull, so I created a walk through of the application deployed locally.
+Walk through link: https://watch.screencastify.com/v/VmX5zlKbBssDIi0ypK24 
 
 ## Acknowledgements ##
 * Source code was from the Develop folder of the coding-boot-camp/miniature-eureka repository. Linked here: (https://github.com/coding-boot-camp/miniature-eureka)

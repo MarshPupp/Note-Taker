@@ -34,7 +34,7 @@ const getNotes = () =>
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
-    }
+    },
   });
 
 const saveNote = (note) =>
